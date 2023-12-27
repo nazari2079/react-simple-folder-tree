@@ -3,7 +3,7 @@
   "description": "A Simple React Folder Tree",
   "author": "Mohammad Nazari",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
