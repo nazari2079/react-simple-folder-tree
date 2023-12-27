@@ -2,7 +2,7 @@ import { FC } from "react";
 import Folder from "./components/Folder";
 import { FoldersProvider } from "./context/folderDataContext";
 
-const App: FC = () => {
+const FolderTree: FC = () => {
   return (
     <div className="p-10 max-w-[500px]">
       <FoldersProvider>
@@ -12,4 +12,4 @@ const App: FC = () => {
   );
 };
 
-export default App;
+export default FolderTree;
