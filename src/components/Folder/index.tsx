@@ -8,7 +8,7 @@ type Props = {
   folderChildren?: FolderDataType;
 };
 
-const iconSize = 20;
+const ICON_SIZE = 20;
 
 const Folder: FC<Props> = (props) => {
   const { folderChildren } = props;
@@ -22,25 +22,25 @@ const Folder: FC<Props> = (props) => {
     <div className="mt-2 first:mt-0 child-input:p-[2px]">
       <FolderName
         folder={data}
-        iconSize={iconSize}
+        iconSize={ICON_SIZE}
         isExpanded={isExpanded}
         setIsExpanded={setIsExpanded}
         setNewEntryType={setNewEntryType}
       />
-      {isExpanded && !!data?.children?.length && (
+      {isExpanded && data.children && Boolean(data.children.length) && (
         <div className="mt-2 pl-4">
-          {data?.children?.map(
+          {data.children.map(
             (folderChild) =>
-              folderChild?.id && (
-                <Folder key={folderChild?.id} folderChildren={folderChild} />
+              folderChild.id && (
+                <Folder key={folderChild.id} folderChildren={folderChild} />
               )
           )}
         </div>
       )}
       {newEntryType && (
         <NewEntry
-          folderId={data?.id}
-          iconSize={iconSize}
+          folderId={data.id}
+          iconSize={ICON_SIZE}
           newEntryType={newEntryType}
           setNewEntryType={setNewEntryType}
         />

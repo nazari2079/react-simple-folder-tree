@@ -30,7 +30,7 @@ const FolderName: FC<Props> = (props) => {
 
   const onRename = () => {
     if (newName) {
-      updateFolderName(folder?.id, newName);
+      updateFolderName(folder.id, newName);
       setNewName("");
     }
     setIsEditing(false);
@@ -51,7 +51,7 @@ const FolderName: FC<Props> = (props) => {
         className="flex items-center space-x-3 cursor-pointer"
         onClick={() => setIsExpanded((state) => !state)}
       >
-        {folder?.isFolder ? (
+        {folder.isFolder ? (
           isExpanded ? (
             <FolderOpen size={iconSize} />
           ) : (
@@ -62,14 +62,14 @@ const FolderName: FC<Props> = (props) => {
         )}
         {isEditing ? (
           <input
-            defaultValue={folder?.name}
+            defaultValue={folder.name}
             placeholder="please enter a name"
             autoFocus
-            onChange={({ currentTarget }) => setNewName(currentTarget?.value)}
+            onChange={({ currentTarget }) => setNewName(currentTarget.value)}
             onKeyDown={(e) => e.key === "Enter" && onRename()}
           />
         ) : (
-          <div>{folder?.name}</div>
+          <div>{folder.name}</div>
         )}
       </div>
       {isHover && (
@@ -78,7 +78,7 @@ const FolderName: FC<Props> = (props) => {
             <TickCircle size={iconSize} onClick={onRename} />
           ) : (
             <>
-              {folder?.isFolder && (
+              {folder.isFolder && (
                 <>
                   <AddSquare
                     size={iconSize}
@@ -90,12 +90,12 @@ const FolderName: FC<Props> = (props) => {
                   />
                 </>
               )}
-              {folder?.id !== 1 && (
+              {folder.id !== 1 && (
                 <>
                   <Edit size={iconSize} onClick={() => setIsEditing(true)} />
                   <Trash
                     size={iconSize}
-                    onClick={() => removeFolder(folder?.id)}
+                    onClick={() => removeFolder(folder.id)}
                   />
                 </>
               )}

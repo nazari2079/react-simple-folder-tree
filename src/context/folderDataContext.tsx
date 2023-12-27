@@ -41,7 +41,7 @@ export const FoldersProvider = (props: { children: ReactNode }) => {
     if (currentNode.id === id) {
       return createNewNode(currentNode);
     }
-    const child: any = currentNode?.children?.map((obj) => {
+    const child: any = currentNode.children?.map((obj) => {
       return editNode(id, createNewNode, obj);
     });
     return { ...currentNode, children: child };

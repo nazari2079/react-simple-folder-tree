@@ -27,11 +27,9 @@ const NewEntry: FC<Props> = (props) => {
     <div className="flex justify-between items-center my-2 child-svg:cursor-pointer">
       <input
         className="w-[80%]"
-        placeholder={`please enter your ${
-          newEntryType === "file" ? "file" : "folder"
-        } name`}
+        placeholder={`please enter your ${newEntryType} name`}
         autoFocus
-        onChange={({ currentTarget }) => setNewEntryName(currentTarget?.value)}
+        onChange={({ currentTarget }) => setNewEntryName(currentTarget.value)}
         onKeyDown={(e) => e.key === "Enter" && onAddNewEntry()}
       />
       <div className="flex items-center space-x-2">
