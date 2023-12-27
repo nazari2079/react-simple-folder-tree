@@ -12,10 +12,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@testing-library/dom": "^9.3.3",
+    "@testing-library/react": "^14.1.2",
+    "c8": "^8.0.1",
     "classnames": "^2.3.2",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react": "^7.33.2",
     "iconsax-react": "^0.0.8",
+    "jsdom": "^23.0.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-test-renderer": "^18.2.0",
+    "vitest": "^1.1.0"
   },
   "devDependencies": {
     "@stefanracic/tailwind-child": "^1.0.5",
