@@ -51,5 +51,6 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/nazari2079"
   },
-  "homepage": "https://github.com/nazari2079/react-simple-folder-tree#readme"
+  "homepage": "https://github.com/nazari2079/react-simple-folder-tree#readme",
+  "repository": "https://github.com/nazari2079/react-simple-folder-tree"
 }
