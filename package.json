@@ -40,14 +40,17 @@
     "vite": "^4.2.0",
     "vite-plugin-dts": "^3.7.0"
   },
-  "main": "./dist/react-simple-folder-tree.umd.js",
-  "module": "./dist/react-simple-folder-tree.es.js",
+  "main": "dist/react-simple-folder-tree.umd.js",
+  "module": "dist/react-simple-folder-tree.es.js",
   "exports": {
     ".": {
       "import": "./dist/react-simple-folder-tree.es.js",
       "require": "./dist/react-simple-folder-tree.umd.js"
     }
   },
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/nazari2079"
   },
