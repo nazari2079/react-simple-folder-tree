@@ -1,14 +1,17 @@
 import { FC } from "react";
 import Folder from "./components/Folder";
 import { FoldersProvider } from "./context/folderDataContext";
+import { FolderDataType } from "./types";
+import "./index.css";
 
-const FolderTree: FC = () => {
+type FolderTreePropsType = {
+  data: FolderDataType;
+};
+const FolderTree: FC<FolderTreePropsType> = (props) => {
   return (
-    <div className="p-10 max-w-[500px]">
-      <FoldersProvider>
-        <Folder />
-      </FoldersProvider>
-    </div>
+    <FoldersProvider data={props.data}>
+      <Folder />
+    </FoldersProvider>
   );
 };
 

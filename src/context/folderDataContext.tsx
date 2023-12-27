@@ -7,7 +7,6 @@ import {
   useState,
 } from "react";
 import { FolderDataType } from "../types";
-import foldersInitialData from "../data/foldersInitialData.json";
 
 type ContextValueType = {
   folders: FolderDataType;
@@ -29,8 +28,12 @@ export const foldersContext = createContext<ContextValueType>({
   addNewFolder: () => {},
 });
 
-export const FoldersProvider = (props: { children: ReactNode }) => {
-  const [folders, setFolders] = useState<FolderDataType>(foldersInitialData);
+type ProviderPropsType = {
+  data: FolderDataType;
+  children: ReactNode;
+};
+export const FoldersProvider = (props: ProviderPropsType) => {
+  const [folders, setFolders] = useState<FolderDataType>(props.data);
 
   const editNode = (
     id: number,
