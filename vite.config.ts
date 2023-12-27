@@ -5,7 +5,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   build: {
     lib: {
-      entry: "./src/app.tsx",
+      entry: "src/app.tsx",
       name: "react-simple-folder-tree",
       fileName: (format) => `react-simple-folder-tree.${format}.js`,
     },
