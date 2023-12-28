@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import { describe, expect, it } from "vitest";
-import FolderTree from "./FolderTree";
+import FolderTree from ".";
 import foldersInitialData from "./data/foldersInitialData.json";
 
 describe("FolderTree component", () => {

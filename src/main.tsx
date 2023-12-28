@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import FolderTree from "./FolderTree";
+import FolderTree from ".";
 import foldersInitialData from "./data/foldersInitialData.json";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
