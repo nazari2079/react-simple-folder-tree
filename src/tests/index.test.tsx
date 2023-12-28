@@ -1,6 +1,6 @@
 import renderer from "react-test-renderer";
 import { describe, expect, it } from "vitest";
-import FolderTree from "..";
+import FolderTree from "../../lib";
 import foldersInitialData from "../data/foldersInitialData.json";
 
 describe("FolderTree component", () => {
