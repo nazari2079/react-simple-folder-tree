@@ -9,18 +9,23 @@ export default defineConfig({
   build: {
     copyPublicDir: false,
     lib: {
-      entry: resolve(__dirname, "src/index.tsx"),
+      entry: resolve(__dirname, "lib/index.ts"),
       name: "react-simple-folder-tree",
-      fileName: (format) => `index.${format}.js`,
+      fileName: "index",
     },
     rollupOptions: {
       external: ["react", "react-dom"],
       output: {
         globals: {
           react: "React",
+          "react-dom": "ReactDOM",
         },
       },
     },
   },
-  plugins: [react(), dts({ insertTypesEntry: true }), libInjectCss()],
+  plugins: [
+    react(),
+    dts({ include: "lib", insertTypesEntry: true }),
+    libInjectCss(),
+  ],
 });

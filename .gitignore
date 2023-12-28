@@ -10,7 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
-src/__snapshots__
+src/tests/__snapshots__
 *.local
 
 # Editor directories and files
