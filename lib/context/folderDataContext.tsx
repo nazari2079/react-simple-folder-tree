@@ -83,29 +83,34 @@ export const FoldersProvider = (props: ProviderPropsType) => {
     return editNode();
   };
 
-  const removeNode = (id: string, node?: FolderDataType): FolderDataType => {
-    const currentNode = node || folders;
+  const removeNodeClosure = (id: string) => {
     let itemDeleted = false;
+    const removeNode = (node?: FolderDataType): FolderDataType => {
+      const currentNode = node || folders;
+      if (itemDeleted) return { ...currentNode };
 
-    if (currentNode.children?.length) {
-      const filtredChilds = currentNode.children.filter((child) => {
-        if (child.id !== id) return true;
-        itemDeleted = true;
-      });
-      if (itemDeleted) return { ...currentNode, children: filtredChilds };
-      else {
-        const children = currentNode.children.map((child) =>
-          removeNode(id, child)
-        );
-        return { ...currentNode, children };
+      if (currentNode.children?.length) {
+        const filtredChilds = currentNode.children.filter((child) => {
+          if (child.id !== id) return true;
+          itemDeleted = true;
+        });
+        if (itemDeleted) return { ...currentNode, children: filtredChilds };
+        else {
+          const children = currentNode.children.map((child) =>
+            removeNode(child)
+          );
+          return { ...currentNode, children };
+        }
       }
-    }
 
-    return { ...currentNode };
+      return { ...currentNode };
+    };
+
+    return removeNode();
   };
 
   const removeFolder = (id: string) => {
-    setFolders(removeNode(id));
+    setFolders(removeNodeClosure(id));
   };
 
   const updateFolderName = (id: string, newName: string) => {
