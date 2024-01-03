@@ -29,12 +29,9 @@ const Folder: FC<Props> = (props) => {
       />
       {isExpanded && data.children && Boolean(data.children.length) && (
         <div className="mt-2 pl-4">
-          {data.children.map(
-            (folderChild) =>
-              folderChild.id && (
-                <Folder key={folderChild.id} folderChildren={folderChild} />
-              )
-          )}
+          {data.children.map((folderChild) => (
+            <Folder key={folderChild.id} folderChildren={folderChild} />
+          ))}
         </div>
       )}
       {newEntryType && (
