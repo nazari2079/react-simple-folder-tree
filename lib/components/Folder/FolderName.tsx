@@ -90,7 +90,7 @@ const FolderName: FC<Props> = (props) => {
                   />
                 </>
               )}
-              {folder.id !== 1 && (
+              {!folder.isRootNode && (
                 <>
                   <Edit size={iconSize} onClick={() => setIsEditing(true)} />
                   <Trash

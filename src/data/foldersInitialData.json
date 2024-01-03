@@ -1,24 +1,21 @@
 {
-  "id": 1,
   "name": "root",
   "isFolder": true,
   "children": [
     {
-      "id": 2,
       "name": "assets",
       "isFolder": true,
-      "children": [{ "id": 3, "name": "image.png", "isFolder": false }]
+      "children": [{ "name": "image.png", "isFolder": false }]
     },
     {
-      "id": 4,
       "name": "src",
       "isFolder": true,
       "children": [
-        { "id": 5, "name": "index.html", "isFolder": false },
-        { "id": 6, "name": "styles.css", "isFolder": false },
-        { "id": 7, "name": "scripts.js", "isFolder": false }
+        { "name": "index.html", "isFolder": false },
+        { "name": "styles.css", "isFolder": false },
+        { "name": "scripts.js", "isFolder": false }
       ]
     },
-    { "id": 8, "name": "package.json", "isFolder": false }
+    { "name": "package.json", "isFolder": false }
   ]
 }

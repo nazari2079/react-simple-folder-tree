@@ -1,11 +1,11 @@
 import { FC } from "react";
 import Folder from "./components/Folder";
 import { FoldersProvider } from "./context/folderDataContext";
-import { FolderDataType } from "./types";
+import { FolderInitialDataType } from "./types";
 import "./index.css";
 
 type FolderTreePropsType = {
-  data: FolderDataType;
+  data: FolderInitialDataType;
 };
 const FolderTree: FC<FolderTreePropsType> = (props) => {
   return (

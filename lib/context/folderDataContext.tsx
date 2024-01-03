@@ -4,23 +4,25 @@ import {
   ReactNode,
   SetStateAction,
   useContext,
+  useId,
   useState,
 } from "react";
-import { FolderDataType } from "../types";
+import { FolderDataType, FolderInitialDataType } from "../types";
 
 type ContextValueType = {
   folders: FolderDataType;
   setFolders: Dispatch<SetStateAction<FolderDataType>>;
-  removeFolder: (id: number) => void;
-  updateFolderName: (id: number, newName: string) => void;
-  addNewFolder: (parentId: number, isFolder: boolean, name: string) => void;
+  removeFolder: (id: string) => void;
+  updateFolderName: (id: string, newName: string) => void;
+  addNewFolder: (parentId: string, isFolder: boolean, name: string) => void;
 };
 
 export const foldersContext = createContext<ContextValueType>({
   folders: {
-    id: 1,
+    id: "_id",
     name: "",
     isFolder: true,
+    isRootNode: true,
   },
   setFolders: () => {},
   removeFolder: () => {},
@@ -29,38 +31,82 @@ export const foldersContext = createContext<ContextValueType>({
 });
 
 type ProviderPropsType = {
-  data: FolderDataType;
+  data: FolderInitialDataType;
   children: ReactNode;
 };
+
+const initializeDataWithId = (
+  data: FolderInitialDataType,
+  recursed = false
+): FolderDataType => {
+  const newData: FolderDataType = {
+    id: useId(),
+    name: data.name,
+    isFolder: data.isFolder,
+    isRootNode: !recursed,
+  };
+
+  if (data.children && data.children.length)
+    newData.children = data.children.map((child) =>
+      initializeDataWithId(child, true)
+    );
+
+  return newData;
+};
+
 export const FoldersProvider = (props: ProviderPropsType) => {
-  const [folders, setFolders] = useState<FolderDataType>(props.data);
+  const [folders, setFolders] = useState<FolderDataType>(
+    initializeDataWithId(props.data)
+  );
 
   const editNode = (
-    id: number,
-    createNewNode: (currentNode: FolderDataType) => any,
+    id: string,
+    createNewNode: (currentNode: FolderDataType) => FolderDataType,
     node?: FolderDataType
-  ) => {
+  ): FolderDataType => {
     const currentNode = node || folders;
     if (currentNode.id === id) {
       return createNewNode(currentNode);
     }
-    const child: any = currentNode.children?.map((obj) => {
-      return editNode(id, createNewNode, obj);
+    const children = currentNode.children?.map((child) => {
+      return editNode(id, createNewNode, child);
     });
-    return { ...currentNode, children: child };
+    if (children) return { ...currentNode, children };
+    else return { ...currentNode };
   };
 
-  const removeFolder = (id: number) => {
-    setFolders(editNode(id, () => ({})));
+  const removeNode = (id: string, node?: FolderDataType): FolderDataType => {
+    const currentNode = node || folders;
+    let itemDeleted = false;
+
+    if (currentNode.children?.length) {
+      const filtredChilds = currentNode.children.filter((child) => {
+        if (child.id !== id) return true;
+        itemDeleted = true;
+      });
+      if (itemDeleted) return { ...currentNode, children: filtredChilds };
+      else {
+        const children = currentNode.children.map((child) =>
+          removeNode(id, child)
+        );
+        return { ...currentNode, children };
+      }
+    }
+
+    return { ...currentNode };
   };
 
-  const updateFolderName = (id: number, newName: string) => {
+  const removeFolder = (id: string) => {
+    setFolders(removeNode(id));
+  };
+
+  const updateFolderName = (id: string, newName: string) => {
     setFolders(
       editNode(id, (currentNode) => ({ ...currentNode, name: newName }))
     );
   };
 
-  const addNewFolder = (parentId: number, isFolder: boolean, name: string) => {
+  const addNewFolder = (parentId: string, isFolder: boolean, name: string) => {
     setFolders(
       editNode(parentId, (currentNode) => ({
         ...currentNode,

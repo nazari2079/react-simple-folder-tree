@@ -4,7 +4,7 @@ import { useFolders } from "../../context/folderDataContext";
 import { NewEntryType } from "../../types";
 
 type Props = {
-  folderId: number;
+  folderId: string;
   iconSize: number;
   newEntryType: NewEntryType;
   setNewEntryType: Dispatch<SetStateAction<NewEntryType>>;
