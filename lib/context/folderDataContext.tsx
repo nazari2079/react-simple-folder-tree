@@ -59,20 +59,28 @@ export const FoldersProvider = (props: ProviderPropsType) => {
     initializeDataWithId(props.data)
   );
 
-  const editNode = (
+  const editNodeClosure = (
     id: string,
-    createNewNode: (currentNode: FolderDataType) => FolderDataType,
-    node?: FolderDataType
-  ): FolderDataType => {
-    const currentNode = node || folders;
-    if (currentNode.id === id) {
-      return createNewNode(currentNode);
-    }
-    const children = currentNode.children?.map((child) => {
-      return editNode(id, createNewNode, child);
-    });
-    if (children) return { ...currentNode, children };
-    else return { ...currentNode };
+    createNewNode: (currentNode: FolderDataType) => FolderDataType
+  ) => {
+    let isFound = false;
+    const editNode = (node?: FolderDataType): FolderDataType => {
+      const currentNode = node || folders;
+      if (isFound) return { ...currentNode };
+
+      if (currentNode.id === id) {
+        isFound = true;
+        return createNewNode(currentNode);
+      }
+
+      const children = currentNode.children?.map((child) => {
+        return editNode(child);
+      });
+      if (children) return { ...currentNode, children };
+      else return { ...currentNode };
+    };
+
+    return editNode();
   };
 
   const removeNode = (id: string, node?: FolderDataType): FolderDataType => {
@@ -102,13 +110,13 @@ export const FoldersProvider = (props: ProviderPropsType) => {
 
   const updateFolderName = (id: string, newName: string) => {
     setFolders(
-      editNode(id, (currentNode) => ({ ...currentNode, name: newName }))
+      editNodeClosure(id, (currentNode) => ({ ...currentNode, name: newName }))
     );
   };
 
   const addNewFolder = (parentId: string, isFolder: boolean, name: string) => {
     setFolders(
-      editNode(parentId, (currentNode) => ({
+      editNodeClosure(parentId, (currentNode) => ({
         ...currentNode,
         children: [
           ...(currentNode as any)?.children,
