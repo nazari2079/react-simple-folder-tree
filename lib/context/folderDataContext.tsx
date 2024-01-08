@@ -125,7 +125,7 @@ export const FoldersProvider = (props: ProviderPropsType) => {
         ...currentNode,
         children: [
           ...(currentNode as any)?.children,
-          { id: Date.now(), name, isFolder, children: [] },
+          { id: Date.now().toString(), name, isFolder, children: [] },
         ],
       }))
     );
