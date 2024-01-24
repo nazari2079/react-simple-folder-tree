@@ -2,14 +2,13 @@ import { Dispatch, FC, SetStateAction, useState } from "react";
 import { FolderDataType, NewEntryType } from "../../types";
 import {
   Folder,
-  Document,
-  FolderOpen,
-  Trash,
+  File,
+  Trash2,
   Edit,
-  TickCircle,
-  FolderAdd,
-  AddSquare,
-} from "iconsax-react";
+  CheckCircle,
+  FolderPlus,
+  FilePlus,
+} from "react-feather";
 import { useFolders } from "../../context/folderDataContext";
 
 type Props = {
@@ -52,13 +51,9 @@ const FolderName: FC<Props> = (props) => {
         onClick={() => setIsExpanded((state) => !state)}
       >
         {folder.isFolder ? (
-          isExpanded ? (
-            <FolderOpen size={iconSize} />
-          ) : (
-            <Folder size={iconSize} />
-          )
+          <Folder size={iconSize} />
         ) : (
-          <Document size={iconSize} />
+          <File size={iconSize} />
         )}
         {isEditing ? (
           <input
@@ -75,16 +70,16 @@ const FolderName: FC<Props> = (props) => {
       {isHover && (
         <div className="flex items-center space-x-2 child-svg:cursor-pointer">
           {isEditing ? (
-            <TickCircle size={iconSize} onClick={onRename} />
+            <CheckCircle size={iconSize} onClick={onRename} />
           ) : (
             <>
               {folder.isFolder && (
                 <>
-                  <AddSquare
+                  <FilePlus
                     size={iconSize}
                     onClick={() => handleOpenNewFolderInput("file")}
                   />
-                  <FolderAdd
+                  <FolderPlus
                     size={iconSize}
                     onClick={() => handleOpenNewFolderInput("folder")}
                   />
@@ -92,7 +87,7 @@ const FolderName: FC<Props> = (props) => {
               )}
               <Edit size={iconSize} onClick={() => setIsEditing(true)} />
               {!folder.isRootNode && (
-                <Trash
+                <Trash2
                   size={iconSize}
                   onClick={() => removeFolder(folder.id)}
                 />

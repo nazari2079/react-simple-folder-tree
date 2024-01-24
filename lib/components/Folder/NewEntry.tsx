@@ -1,5 +1,5 @@
 import { Dispatch, FC, SetStateAction, useState } from "react";
-import { TickCircle, CloseCircle } from "iconsax-react";
+import { CheckCircle, XCircle } from "react-feather";
 import { useFolders } from "../../context/folderDataContext";
 import { NewEntryType } from "../../types";
 
@@ -33,8 +33,8 @@ const NewEntry: FC<Props> = (props) => {
         onKeyDown={(e) => e.key === "Enter" && onAddNewEntry()}
       />
       <div className="flex items-center space-x-2">
-        <TickCircle size={iconSize} onClick={onAddNewEntry} />
-        <CloseCircle size={iconSize} onClick={() => setNewEntryType(null)} />
+        <CheckCircle size={iconSize} onClick={onAddNewEntry} />
+        <XCircle size={iconSize} onClick={() => setNewEntryType(null)} />
       </div>
     </div>
   );
